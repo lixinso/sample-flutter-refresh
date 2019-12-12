@@ -61,12 +61,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void loadMore(){
-    if((present + perPage) > originalItems.length){
-      items.addAll(originalItems.getRange(present, originalItems.length));
-    }else{
-      items.addAll(originalItems.getRange(present, present + perPage));
-    }
-    present = present + perPage;
+
+    setState(() {
+      if((present + perPage) > originalItems.length){
+        items.addAll(originalItems.getRange(present, originalItems.length));
+      }else{
+        items.addAll(originalItems.getRange(present, present + perPage));
+      }
+      present = present + perPage;
+    });
+
+
   }
 
   @override
@@ -98,9 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: FlatButton(
                 child: Text("load more"),
                 onPressed: (){
-                  setState(() {
                     loadMore();
-                  });
                 },
               ),
             )
