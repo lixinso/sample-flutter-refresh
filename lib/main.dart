@@ -60,6 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void loadMore(){
+    if((present + perPage) > originalItems.length){
+      items.addAll(originalItems.getRange(present, originalItems.length));
+    }else{
+      items.addAll(originalItems.getRange(present, present + perPage));
+    }
+    present = present + perPage;
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -74,30 +83,35 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: ListView.builder(
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification scrollInfo){
+          if(scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent){
+            loadMore();
+          }
+        },
+        child:  ListView.builder(
           itemCount: (present <= originalItems.length)? items.length + 1: items.length,
           itemBuilder: (context, index){
             return (index == items.length) ?
-                Container(
-                  color: Colors.greenAccent,
-                  child: FlatButton(
-                    child: Text("load more"),
-                    onPressed: (){
-                      setState(() {
-                        if((present + perPage) > originalItems.length){
-                          items.addAll(originalItems.getRange(present, originalItems.length));
-                        }else{
-                          items.addAll(originalItems.getRange(present, present + perPage));
-                        }
-                        present = present + perPage;
-                      });
-                    },
-                  ),
-                )
+            Container(
+              color: Colors.greenAccent,
+              child: FlatButton(
+                child: Text("load more"),
+                onPressed: (){
+                  setState(() {
+                    loadMore();
+                  });
+                },
+              ),
+            )
                 : ListTile(
-                    title: Text('${items[index]}'),
-                  );
+              title: Text('${items[index]}'),
+            );
           }),
+
+      ),
+
+
     );
   }
 }
