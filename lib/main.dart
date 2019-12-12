@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 )
                 : ListTile(
-                    title: Text('$items[index]'),
+                    title: Text('${items[index]}'),
                   );
           }),
     );
