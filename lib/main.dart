@@ -64,9 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       if((present + perPage) > originalItems.length){
-        items.addAll(originalItems.getRange(present, originalItems.length));
+        items.insertAll(0, originalItems.getRange(present, originalItems.length));
       }else{
-        items.addAll(originalItems.getRange(present, present + perPage));
+        items.insertAll(0, originalItems.getRange(present, present + perPage));
       }
       present = present + perPage;
     });
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification scrollInfo){
-          if(scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent){
+          if(scrollInfo.metrics.pixels == scrollInfo.metrics.minScrollExtent){
             loadMore();
           }
         },
