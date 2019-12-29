@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Drag to Refresh Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -91,6 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification scrollInfo){
           if(scrollInfo.metrics.pixels == scrollInfo.metrics.minScrollExtent){
+
+            print("min scroll extend: " + DateTime.now().toIso8601String());
+
             loadMore();
           }
         },
