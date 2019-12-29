@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification scrollInfo){
-          if(scrollInfo.metrics.pixels == scrollInfo.metrics.minScrollExtent){
+          if(scrollInfo is ScrollEndNotification && scrollInfo.metrics.pixels == scrollInfo.metrics.minScrollExtent){
 
             print("min scroll extend: " + DateTime.now().toIso8601String());
 

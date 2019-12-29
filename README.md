@@ -18,3 +18,5 @@ samples, guidance on mobile development, and a full API reference.
 
 ### References
 - https://medium.com/@KarthikPonnam/flutter-loadmore-in-listview-23820612907d
+- https://stackoverflow.com/questions/48035594/flutter-notificationlistener-with-scrollnotification-vs-scrollcontroller
+
